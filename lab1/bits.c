@@ -154,7 +154,8 @@ int thirdBits(void) {
  *   Rating: 2
  */
 int fitsBits(int x, int n) {
-    int l=32+~n+1;
+    int l;
+    l=32+~n+1;
   return !((x<<l)>>l+~x+1);//若可以表示，则高位全部是符号位，左移右移后不变，与-x相加为0；否则变了相加不为0
 }
 /* 
@@ -166,8 +167,9 @@ int fitsBits(int x, int n) {
  *  Rating: 2
  */
 int sign(int x) {
-    int a=~(x>>31);//-1 -1 0 2a=-2 -2 0
-    int b=!x;//0 1 0
+    int a,b;
+    a=~(x>>31);//-1 -1 0 2a=-2 -2 0
+    b=!x;//0 1 0
     return ~(a+a+b);//2a+b:-2 -1 0;
 }
 /* 
@@ -179,8 +181,9 @@ int sign(int x) {
  *   Rating: 2
  */
 int getByte(int x, int n) {
-    int a=n+n;
-  return ((11<a)&x)>>a;
+    int a;
+    a=n+n;
+  return ((11<<a)&x)>>a;
 }
 // Rating: 3
 /* 
@@ -192,8 +195,9 @@ int getByte(int x, int n) {
  *   Rating: 3 
  */
 int logicalShift(int x, int n) {
-    int a=32+~n+1;
-    int b=~0<<a;
+    int a,b;
+    a=32+~n+1;
+    b=~0<<a;
 
   return (x>>n)&~b;
 }
@@ -218,11 +222,19 @@ int addOK(int x, int y) {
  *   Rating: 4 
  */
 int bang(int x) {
-    int a=~x+1;
-    int b=x^a;
-    int c=~b>>31;
+    int a,b,c;
+    a=~x+1;
+    b=x^a;
+    c=~b>>31;
   return c&1;
 }
+/*int bang(int x) {
+    int a,b,c;
+    a=~x+1;
+    b=x^a;
+    c=~b>>31;
+  return c&1;
+}*/
 // Extra Credit: Rating: 3
 /* 
  * conditional - same as x ? y : z 
@@ -232,9 +244,10 @@ int bang(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-    int a=!!x;
-    int b=~x+1;
-    int c=~b;
+    int a,b,c;
+    a=!!x;
+    b=~x+1;
+    c=~b;
   return c&z|b&y;
 }
 // Extra Credit: Rating: 4
@@ -248,10 +261,11 @@ int conditional(int x, int y, int z) {
  */
 int isPower2(int x) 
 {
-    int a=~x+1;//x中从右到左找到第一个为1的位（位号n），则-x中：位号小于等于n的位于x中相同，大于n的位于x相反。对于2的幂，高于n的位全部为0，所以提取出小于等于n的位即可提取出x（包括最小负数），非2的幂则不行（高位有1）
-    int b=x&b;//
-    int c=x-b;
-    int d=x-1<<31;
+    int a,b,c,d;
+    a=~x+1;//x中从右到左找到第一个为1的位（位号n），则-x中：位号小于等于n的位于x中相同，大于n的位于x相反。对于2的幂，高于n的位全部为0，所以提取出小于等于n的位即可提取出x（包括最小负数），非2的幂则不行（高位有1）
+    b=x&a;//
+    c=x-b;
+    d=x-(1<<31);
   return !c&!!d;//c为0，d不为0则是1；
 }
 // Rating: 2
@@ -288,7 +302,7 @@ unsigned float_i2f(int x) {
         sign=0x80000000;
     }
     i=31;
-    mask=0x80000000;
+    mask=0x8fffffff;
     while(x>>i == 0){
         i--;
         mask>>1;
