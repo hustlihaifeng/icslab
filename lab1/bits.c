@@ -141,7 +141,8 @@ int bitXor(int x, int y) {
  */
 int thirdBits(void) {
     //01001001 00100100 10010010 01001001    
-  return 01001001<<24 | 00100100<<16 | 10010010<<8 | 01001001;
+  //return 01001001<<24 | 00100100<<16 | 10010010<<8 | 01001001;
+  return 0x49<<24 | 0x24<<16 | 0x92<<8 | 0x49;
 }
 // Rating: 2
 /* 
@@ -156,7 +157,7 @@ int thirdBits(void) {
 int fitsBits(int x, int n) {
     int l;
     l=32+~n+1;
-  return !((x<<l)>>l+~x+1);//若可以表示，则高位全部是符号位，左移右移后不变，与-x相加为0；否则变了相加不为0
+  return !(((x<<l)>>l)+~x+1);//若可以表示，则高位全部是符号位，左移右移后不变，与-x相加为0；否则变了相加不为0
 }
 /* 
  * sign - return 1 if positive, 0 if zero, and -1 if negative
@@ -246,9 +247,9 @@ int bang(int x) {
 int conditional(int x, int y, int z) {
     int a,b,c;
     a=!!x;
-    b=~x+1;
+    b=~a+1;
     c=~b;
-  return c&z|b&y;
+  return (c&z)|(b&y);
 }
 // Extra Credit: Rating: 4
 /*
@@ -264,8 +265,8 @@ int isPower2(int x)
     int a,b,c,d;
     a=~x+1;//x中从右到左找到第一个为1的位（位号n），则-x中：位号小于等于n的位于x中相同，大于n的位于x相反。对于2的幂，高于n的位全部为0，所以提取出小于等于n的位即可提取出x（包括最小负数），非2的幂则不行（高位有1）
     b=x&a;//
-    c=x-b;
-    d=x-(1<<31);
+    c=x+~b+1;
+    d=x+~(1<<31)+1;
   return !c&!!d;//c为0，d不为0则是1；
 }
 // Rating: 2
@@ -300,15 +301,17 @@ unsigned float_i2f(int x) {
     if(x<0){
         x=-x;
         sign=0x80000000;
+    }else if(x==0){
+        return 0;
     }
     i=31;
     mask=0x8fffffff;
     while(x>>i == 0){
+        mask=mask>>1;
         i--;
-        mask>>1;
     }//跳出时有i+1位,mask右边也有i个0。对正数，类似于10进制的科学计数法，将最高的一个1置0即可得到尾数的表达形式
     E=i+127;
-  return sign | E<<23 | x&mask;
+  return sign | (E<<23) | (x&mask);
 }
 // Rating: 4
 /* 
