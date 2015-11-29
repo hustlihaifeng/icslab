@@ -130,7 +130,7 @@ int bitAnd(int x, int y) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return ~(~x&~y);
+  return (~(~x&~y))&(~(x&y));
 }
 /* 
  * thirdBits - return word with every third bit (starting from the LSB) set to 1
@@ -183,8 +183,8 @@ int sign(int x) {
  */
 int getByte(int x, int n) {
     int a;
-    a=n+n;
-  return ((11<<a)&x)>>a;
+    a=n<<3;
+    return (x>>a)&0xff;
 }
 // Rating: 3
 /* 
@@ -197,10 +197,10 @@ int getByte(int x, int n) {
  */
 int logicalShift(int x, int n) {
     int a,b;
-    a=32+~n+1;
-    b=~0<<a;
-
-  return (x>>n)&~b;
+    a=32+~n;
+    b=(~0)<<a;
+    
+  return (x>>n)&(~b|(1<<a));//notice that here x<<32=x !!,so when n is 0,if we << (32 -n),there will be wrong , so we let n is no more than 31,but then that will decrease a 1 in the high bit of the mask,so we  add that 1 manually;
 }
 /* 
  * addOK - Determine if can compute x+y without overflow
@@ -211,8 +211,12 @@ int logicalShift(int x, int n) {
  *   Rating: 3
  */
 int addOK(int x, int y) {
-    
-  return 2;
+    int a,b,c,d;
+    d=1<<31;
+    a=x+y;
+    b=((x^y)&d);//为1不超
+    c=((x^a)&d);//为0不超
+  return !(c&(~b));
 }
 // Rating: 4
 /* 
@@ -225,7 +229,7 @@ int addOK(int x, int y) {
 int bang(int x) {
     int a,b,c;
     a=~x+1;
-    b=x^a;
+    b=x|a;
     c=~b>>31;
   return c&1;
 }
@@ -267,11 +271,11 @@ int isPower2(int x)
     b=x&a;//
     c=x+~b+1;
     d=x+~(1<<31)+1;
-  return !c&!!d;//c为0，d不为0则是1；
+  return !c&!!d&(!!x);//c为0，d不为0则是1；
 }
 // Rating: 2
 /* 
- * float_neg - Return bit-level equivalent of expression -f for
+ * float_neg - Return bit-level equivalent of expression -f(取负) for
  *   floating point argument f.
  *   Both the argument and result are passed as unsigned int's, but
  *   they are to be interpreted as the bit-level representations of
@@ -282,8 +286,12 @@ int isPower2(int x)
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf) {
-    
-    return 2;
+    if((uf&0x7f800000)==0x7f800000){
+        if(uf&0x7fffff){
+            uf=uf^0x80000000;
+        }
+    }
+    return uf^0x80000000;
 }
 // Rating: 4
 /* 
@@ -295,7 +303,7 @@ unsigned float_neg(unsigned uf) {
  *   Max ops: 30
  *   Rating: 4mZ */
 unsigned float_i2f(int x) {
-    unsigned sign,mask;
+    unsigned sign,flag,tmp,f;
     int i,E;
     sign=0;
     if(x<0){
@@ -304,14 +312,22 @@ unsigned float_i2f(int x) {
     }else if(x==0){
         return 0;
     }
-    i=31;
-    mask=0x8fffffff;
-    while(x>>i == 0){
-        mask=mask>>1;
-        i--;
-    }//跳出时有i+1位,mask右边也有i个0。对正数，类似于10进制的科学计数法，将最高的一个1置0即可得到尾数的表达形式
-    E=i+127;
-  return sign | (E<<23) | (x&mask);
+    f=x;
+    i=0;
+    while((f&0x80000000)!=0x80000000){
+        f=f<<1;
+        i++;//到最左边为1时，左移了多少位，则原来有32-i位，去掉首1后就是31-i=E
+    }
+    tmp=f&0xff;//00,7f;80,ff
+    if(tmp>0x80){
+        flag=1;
+    }else if(tmp<0x80){
+        flag=0;
+    }else{
+        flag=(f&0x100)>0?1:0;
+    }
+    E=31-i+127;
+    return sign+(E<<23)+((f<<1)>>9)+flag;
 }
 // Rating: 4
 /* 
@@ -326,17 +342,20 @@ unsigned float_i2f(int x) {
  *   Rating: 4
  */
 unsigned float_twice(unsigned uf) {
-    unsigned signmask,emask,fmask,sign,e,f;
+    unsigned signmask,emask,sign,e;
     signmask=0x80000000;
     emask=0x7f800000;
-    fmask=0x7fffff;
     sign=uf&signmask;
     e=uf&emask;
-    f=uf&fmask;
-    if(e==emask && f!=0){
-        return uf;
+    if(e){//规格化的
+        if(e!=0x7f800000){//NaN不变
+            uf=uf+0x800000;
+            if(e==0x7f000000){//到无穷了
+                uf=uf&0xff800000;    
+            }
+        }
     }else{
-        e=e+0x800000;
-        return sign|e|f;
+        uf=uf<<1|sign;//非规格化的，直接乘2
     }
+   return uf;
 }
