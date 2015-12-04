@@ -1,0 +1,114 @@
+/lib64/ld-linux-x86-64.so.2
+libc.so.6
+socket
+cuserid
+fflush
+strcpy
+exit
+sprintf
+fopen
+__isoc99_sscanf
+connect
+signal
+puts
+stdin
+rewind
+strtol
+fgets
+tmpfile
+stdout
+fputc
+fclose
+__ctype_b_loc
+getenv
+system
+gethostbyname
+fwrite
+bcopy
+fprintf
+sleep
+__libc_start_main
+__gmon_start__
+GLIBC_2.3
+GLIBC_2.7
+GLIBC_2.2.5
+5B% 
+%D% 
+%B% 
+%:% 
+%2% 
+%*% 
+%"% 
+%z$ 
+%r$ 
+%j$ 
+%b$ 
+%Z$ 
+UH-`:`
+UH-`:`
+t	92
+090~
+ATUSH
+t$:E
+[]A\
+ATUSH
+[]A\
+ATUSH
+nobof
+`[]A\
+=A" 
+[]A\A]A^A_
+%s: Error: Couldn't open %s
+Usage: %s [<input_file>]
+That's number 2.  Keep going!
+Halfway there!
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+So you got that one.  Try this one.
+Congratulations! You've (mostly) defused the bomb!
+Hit Control-C to escape phase 6 (for free!), but if you want to
+try phase 6 for extra credit, you can continue.  Just beware!
+Science isn't about why, it's about why not?
+Wow! You've defused the secret stage!
+%d %c %d
+So you think you can stop the bomb with ctrl-c, do you?
+nonexistenthost.cs.washington.edu
+Curses, you've found the secret phase!
+But finding it and solving it are quite different...
+Congratulations! You've defused the bomb! Again!
+Well...
+OK. :-)
+Invalid phase%s
+Bad host (1).
+Bad host (2).
+Bad host (3).
+defused
+exploded
+ERROR: dup(0) error
+ERROR: close error
+ERROR: tmpfile error
+Subject: Bomb notification
+bomb-header:%s:%d:%s:%s:%d
+bomb-string:%s:%d:%s:%d:%s
+bomb
+/usr/sbin/sendmail -bm
+%s %s@%s
+ERROR: notification error
+ERROR: fclose(tmp) error
+ERROR: dup(tmpstdin) error
+ERROR: close(tmpstdin)
+BOOM!!!
+The bomb has blown up.
+%d %d %d %d %d %d
+Error: Premature EOF on stdin
+GRADE_BOMB
+Error: Input line too long
+%d %s
+austinpowers
+attu1.cs.washington.edu
+attu2.cs.washington.edu
+attu3.cs.washington.edu
+attu4.cs.washington.edu
+;*3$"
+uwcse351-14sp-lab2
