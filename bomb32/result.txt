@@ -1,0 +1,15 @@
+Public speaking is very easy.
+1 2 6 24 120 720
+0 q 777
+9
+opukma
+4 2 6 3 1 5
+
+0 q 777
+1 b 214
+2 k 251
+3 o 160
+4 t 458
+5 v 780
+6 b 524
+
