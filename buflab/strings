@@ -1,0 +1,186 @@
+/lib/ld-linux.so.2
+__gmon_start__
+libc.so.6
+_IO_stdin_used
+socket
+strcpy
+exit
+sprintf
+srand
+__strdup
+__isoc99_sscanf
+connect
+signal
+puts
+stdin
+getpid
+mmap
+calloc
+memset
+__errno_location
+read
+getopt
+memcpy
+strcasecmp
+optarg
+stderr
+alarm
+munmap
+gethostbyname
+gethostname
+fwrite
+srandom
+bcopy
+close
+_IO_getc
+__libc_start_main
+GLIBC_2.7
+GLIBC_2.0
+PTRh 
+[^_]
+`XUt1
+[^_]
+L[^_]
+Erro
+r: C
+lien
+t un
+able
+ to 
+crea
+te s
+@ ockef
+Erro
+r: R
+esul
+t st
+ring
+ too
+ lar
+ge. 
+A Incr
+A$ease
+A( SUB
+A,MITR
+A0_MAX
+A4BUF
+<-t$<*t <.t
+Y< u
+Erro
+r: C
+lien
+t un
+able
+ to 
+writ
+e to
+A  the
+A$ ser
+A(ver
+Erro
+r: C
+lien
+t un
+able
+ to 
+read
+ fir
+B st h
+B$eade
+B(r fr
+B,om s
+B0ervef
+Erro
+r: C
+lien
+t un
+able
+ to 
+read
+ hea
+B ders
+B$ fro
+B(m se
+B,rver
+Erro
+r: C
+lien
+t un
+able
+ to 
+read
+ sta
+B tus 
+B$mess
+B(age 
+B,from
+B0 ser
+B4ver
+[^_]
+Erro
+r: C
+lien
+t un
+able
+ to 
+crea
+te s
+F ockef
+,[^_]
+[^_]
+Usage: %s -u <userid> [-nsh]
+  -u <userid> User ID
+  -n          Nitro mode
+Better luck next time
+Smoke!: You called smoke()
+Fizz!: You called fizz(0x%x)
+Misfire: global_value = 0x%x
+Dud: getbufn returned 0x%x
+Boom!: getbuf returned 0x%x
+Dud: getbuf returned 0x%x
+Type string:
+gsnhu:
+Userid: %s
+Cookie: 0x%x
+  -s          Submit your solution to the grading server
+  -h          Print help information
+Oops!: You executed an illegal instruction
+Ouch!: You caused a segmentation fault!
+Crash!: You caused a bus error!
+Misfire: You called fizz(0x%x)
+Bang!: You set global_value to 0x%x
+Sabotaged!: the stack has been corrupted
+KABOOM!: getbufn returned 0x%x
+Internal error.  Couldn't use mmap. Try different value for START_ADDR
+This is a quiet bomb. Ignoring -s flag.
+%s: Missing required argument (-u <userid)
+0123456789ABCDEFinitialize_bomb: Could not get hostname of this machine
+initialize_bomb: Error: %s is not one of the legal hosts:
+No userid indicated.  Results not validated
+Invalid level.  Results not validated
+Warning: Input string too large. Results not validated
+Sent exploit string to server to be validated.
+Warning: Unable to send exploit string to grading server:
+initialize_bomb: %s
+Keep going
+VALID
+%d:%x:%s
+NICE JOB!
+bluefish.ics.cs.cmu.edu
+angelshark.ics.cs.cmu.edu
+greatwhite.ics.cs.cmu.edu
+makoshark.ics.cs.cmu.edu
+Program timed out after %d seconds
+Error: DNS unable to resolve address for %s
+Error: Unable to connect to server %s
+Error: HTTP request failed with error %d: %s
+GET /%s/submitr.pl/?userid=%s&lab=%s&result=%s&submit=submit HTTP/1.0
+Error: Result string contains an illegal or unprintable character.
+Error: Unable to connect to server %s:%d
+%%%02X
+%s %d %[a-zA-z ]
+cs.nju.edu.cn
+AUTORESULT_STRING=%s
+buflab
+csapp
+;*2$"
